@@ -1,0 +1,33 @@
+{
+    "language": "English",
+    "invalid_email": "Email không hợp lệ.",
+    "weak_password": "Mật khẩu quá yếu.",
+    "error": "Lỗi",
+    "unknown_error": "Lỗi không xác định!",
+    "wrong_password": "Sai mật khẩu.",
+    "user_not_found": "Tài khoản không tồn tại.",
+    "email_already_in_use": "Email đã được sử dụng.",
+    "login_subtitle": "Đăng nhập bằng email\nchưa thể dùng số điện thoại",
+    "auth_field_email": "Địa chỉ email",
+    "auth_field_password": "Mật khẩu",
+    "auth_forgot": "Quên mật khẩu?",
+    "save_login": "Lưu thông tin đăng nhập",
+    "login": "Đăng nhập",
+    "new_account": "Tạo tài khoản mới",
+    "error_upload_avatar": "Lỗi upload ảnh đại diện",
+    "ask_signup": "Đã có tài khoản",
+    "source_camera": "Chụp ảnh",
+    "source_gallery": "Thư viện",
+    
+    "more": "Xem thêm",
+    "archive": "Lưu trữ",
+
+    "brief_image": "Đã gửi 1 ảnh.",
+    "brief_like": "Đã gửi nút like.",
+    "brief_url": "Đã gửi 1 đường dẫn.",
+    "brief_gif": "Đã gửi 1 ảnh động",
+
+    "is_online": "Đang hoạt động",
+
+    "temp": "temp"
+}
