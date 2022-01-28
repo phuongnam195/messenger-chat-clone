@@ -15,7 +15,7 @@ final appThemeData = ThemeData(
         headline1: const TextStyle(
             color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
         headline2: const TextStyle(
-            color: Colors.black, fontSize: 19, fontWeight: FontWeight.w500),
+            color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500),
         subtitle1: const TextStyle(
             color: Color(0xff808080),
             fontSize: 15,

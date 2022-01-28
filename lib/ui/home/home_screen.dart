@@ -6,7 +6,7 @@ import '../../generated/l10n.dart';
 import '../../models/account.dart';
 import 'appbar.dart';
 import 'bottombar.dart';
-import 'pages/chat_page.dart';
+import 'pages/friend_page.dart';
 import 'pages/people_page.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                     return const PeoplePage();
                   }
                 }
-                return ChatPage(
+                return FriendPage(
                   myId: currentAccount.profile.id,
                   friendIDs: currentAccount.friendIDs,
                 );

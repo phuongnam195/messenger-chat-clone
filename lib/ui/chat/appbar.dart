@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:messenger_chat_clone/generated/l10n.dart';
 
+import '../../generated/l10n.dart';
 import '../../../foundation/extensions/meta_icons_icons.dart';
 import '../../../blocs/friend_bloc.dart';
 import '../../../models/profile.dart';

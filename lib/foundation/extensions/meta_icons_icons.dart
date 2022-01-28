@@ -50,4 +50,7 @@ class MetaIcons {
   static const IconData trash = IconData(0xe81a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData wave_hand = IconData(0xe81b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData sticker_face = IconData(0xe81c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData notification_disable = IconData(0xe81d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData waiting_accept = IconData(0xe81e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData add_friend = IconData(0xe81f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
