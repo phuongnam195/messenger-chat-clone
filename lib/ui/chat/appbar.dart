@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:messenger_chat_clone/generated/l10n.dart';
 
+import '../../generated/l10n.dart';
 import '../../../foundation/extensions/meta_icons_icons.dart';
 import '../../../blocs/friend_bloc.dart';
 import '../../../models/profile.dart';
@@ -23,7 +23,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    const SPACING = SizedBox(width: 10);
+    const spacing = SizedBox(width: 10);
     var statusBarHeight = MediaQuery.of(context).padding.top;
     var titlePadding = EdgeInsets.only(top: statusBarHeight + 8, bottom: 8);
 
@@ -49,9 +49,9 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
               final friendProfile = snapshot.data!;
               return Row(
                 children: [
-                  SPACING,
+                  spacing,
                   _buttomBack(context),
-                  SPACING,
+                  spacing,
                   _title(titlePadding, friendProfile, context, friendBloc),
                   const Spacer(),
                   _buttonAudioCall(context),
@@ -84,7 +84,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
         Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               friendProfile.fullname,

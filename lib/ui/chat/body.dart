@@ -75,6 +75,7 @@ class _ChatBodyState extends State<ChatBody> {
                       content: message.content,
                       isMine: isMine,
                       key: ValueKey(message.id),
+                      bubbleType: _getBubbleType(index, messages),
                     );
                   case 'image':
                   case 'gif':
@@ -93,5 +94,59 @@ class _ChatBodyState extends State<ChatBody> {
                 return Container();
               });
         });
+  }
+
+  bool _isMine(Message message) {
+    return message.sender == widget.myId;
+  }
+
+  BubbleType _getBubbleType(int index, List<Message> messages) {
+    // Chỉ có duy nhất 1 tin nhắn
+    if (messages.length == 1) {
+      return BubbleType.single;
+    }
+
+    // Là tin nhắn mới nhất (dưới cùng),
+    if (index == 0) {
+      // và tin nhắn kế trên là của đối phương
+      if (_isMine(messages[index]) != _isMine(messages[index + 1])) {
+        return BubbleType.single;
+      }
+      // ngược lại, là của mình
+      else {
+        return BubbleType.bottom;
+      }
+    }
+
+    // Là tin nhắn cũ nhất (trên cùng),
+    if (index == messages.length - 1) {
+      // và tin nhắn kế dưới là của đối phương
+      if (_isMine(messages[index]) != _isMine(messages[index - 1])) {
+        return BubbleType.single;
+      }
+      // ngược lại, là của mình
+      else {
+        return BubbleType.top;
+      }
+    }
+
+    // Tin nhắn kế trên là của đối phương
+    if (_isMine(messages[index]) != _isMine(messages[index + 1])) {
+      // Tin nhắn kế dưới cũng là của đối phương
+      if (_isMine(messages[index]) != _isMine(messages[index - 1])) {
+        return BubbleType.single;
+      }
+      // Tin nhắn kế dưới là của mình
+      else {
+        return BubbleType.top;
+      }
+    }
+
+    // Tin nhắn kế dưới là của đối phương
+    if (_isMine(messages[index]) != _isMine(messages[index - 1])) {
+      return BubbleType.bottom;
+    }
+
+    return BubbleType.middle;
   }
 }

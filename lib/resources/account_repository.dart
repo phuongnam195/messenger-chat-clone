@@ -4,11 +4,11 @@ import '../models/account.dart';
 import '../models/profile.dart';
 
 class AccountRepository {
-  final _accountsFirestore = FirebaseFirestore.instance.collection('accounts');
+  final _usersFirestore = FirebaseFirestore.instance.collection('users');
 
   // Lấy dữ liệu của tài khoản hiện tại từ Firebase
   Future<Account?> fetchAccount(String uid) async {
-    final snapshot = await _accountsFirestore.doc(uid).get();
+    final snapshot = await _usersFirestore.doc(uid).get();
     final map = snapshot.data();
 
     if (map == null) {
@@ -32,6 +32,6 @@ class AccountRepository {
 
   // Cập nhật trạng thái online cho tài khoản [uid]
   Future<void> setOnline(String uid, bool newState) async {
-    await _accountsFirestore.doc(uid).update({'isOnline': newState});
+    await _usersFirestore.doc(uid).update({'isOnline': newState});
   }
 }

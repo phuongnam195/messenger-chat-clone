@@ -47,7 +47,9 @@ class FriendBloc {
         _oldOnline = newOnline;
       }
     });
+  }
 
+  void streamLastMessage() {
     _chatRepository
         .messagesStream(combineID(_myId, _friendId))
         .listen((newMessages) {
@@ -73,10 +75,11 @@ class FriendBlocsCache {
   final List<String> _logKeys = [];
 
   FriendBloc get(String myId, String friendId) {
-    final key = friendId;
+    final key = myId + friendId;
     if (!_cache.containsKey(key)) {
       _cache[key] = FriendBloc(myId, friendId);
       _cache[key]!.streamProfileAndOnline();
+      _cache[key]!.streamLastMessage();
       print('<<FriendBlocsCache-get()>>: key = $key');
       _logKeys.add(key);
       if (_cache.length > _threshold) {

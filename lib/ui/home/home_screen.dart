@@ -6,7 +6,7 @@ import '../../generated/l10n.dart';
 import '../../models/account.dart';
 import 'appbar.dart';
 import 'bottombar.dart';
-import 'pages/chat_page.dart';
+import 'pages/friend_page.dart';
 import 'pages/people_page.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -20,19 +20,23 @@ class HomeScreen extends StatelessWidget {
       stream: accountBloc.currentAccount,
       builder: (ctx, snapshot) {
         if (snapshot.hasError) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Icon(Icons.error_outline),
-              Text(S.current.unknown_error),
-            ],
+          return Scaffold(
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(Icons.error_outline),
+                Text(S.current.unknown_error),
+              ],
+            ),
           );
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Align(
-            alignment: Alignment.topCenter,
-            child: LinearProgressIndicator(),
+          return const Scaffold(
+            body: Align(
+              alignment: Alignment.topCenter,
+              child: LinearProgressIndicator(),
+            ),
           );
         }
 
@@ -49,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                     return const PeoplePage();
                   }
                 }
-                return ChatPage(
+                return FriendPage(
                   myId: currentAccount.profile.id,
                   friendIDs: currentAccount.friendIDs,
                 );

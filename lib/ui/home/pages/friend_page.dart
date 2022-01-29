@@ -12,8 +12,8 @@ import '../../common/avatar.dart';
 import '../../common/online_dot.dart';
 import '../../../foundation/utils/converter.dart';
 
-class ChatPage extends StatelessWidget {
-  const ChatPage({Key? key, required this.myId, required this.friendIDs})
+class FriendPage extends StatelessWidget {
+  const FriendPage({Key? key, required this.myId, required this.friendIDs})
       : super(key: key);
 
   final String myId;
@@ -21,7 +21,6 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('<<HomeBody>>: build()');
     return ListView.builder(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
@@ -42,7 +41,6 @@ class _FriendItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('<<_FriendItem>>: build()');
     const ITEM_HEIGHT = 70.0;
 
     final friendBloc = FriendBlocsCache.instance.get(myId, friendId);
@@ -52,11 +50,25 @@ class _FriendItem extends StatelessWidget {
         child: StreamBuilder<Profile>(
             stream: friendBloc.profile,
             builder: (context, snapshot) {
-              print('<<_FriendItem>>: get snapshot');
-
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Shimmer.fromColors(
-                    child: const Text('LOADING'),
+                    child: ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        minLeadingWidth: 50,
+                        leading: const FittedBox(
+                            child: Icon(Icons.circle, size: 50)),
+                        title: Container(
+                          width: 300,
+                          height: 10,
+                          color: Colors.black,
+                        ),
+                        minVerticalPadding: 5,
+                        subtitle: Container(
+                          width: 300,
+                          height: 5,
+                          color: Colors.black,
+                        )),
                     baseColor: Colors.red,
                     highlightColor: Colors.yellow);
               }
@@ -65,8 +77,8 @@ class _FriendItem extends StatelessWidget {
                   color: Colors.red,
                 );
               }
+
               final profile = snapshot.data!;
-              print('<<_FriendItem>>: fullname = ${profile.fullname}');
               return Slidable(
                 endActionPane: ActionPane(
                   motion: const DrawerMotion(),
