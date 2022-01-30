@@ -1,8 +1,7 @@
 class MyException implements Exception {
   final String message;
-  final String? code;
 
-  MyException(this.message, [this.code]);
+  MyException(this.message);
 
   @override
   String toString() {

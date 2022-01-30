@@ -23,38 +23,44 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "archive": MessageLookupByLibrary.simpleMessage("Lưu trữ"),
-        "ask_signup": MessageLookupByLibrary.simpleMessage("Đã có tài khoản"),
-        "auth_field_email":
-            MessageLookupByLibrary.simpleMessage("Địa chỉ email"),
-        "auth_field_password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+        "ask_signup": MessageLookupByLibrary.simpleMessage("Đã có tài khoản?"),
         "auth_forgot": MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
         "brief_gif": MessageLookupByLibrary.simpleMessage("Đã gửi 1 ảnh động"),
         "brief_image": MessageLookupByLibrary.simpleMessage("Đã gửi 1 ảnh."),
         "brief_like": MessageLookupByLibrary.simpleMessage("Đã gửi nút like."),
         "brief_url":
             MessageLookupByLibrary.simpleMessage("Đã gửi 1 đường dẫn."),
+        "email_address": MessageLookupByLibrary.simpleMessage("Địa chỉ email"),
         "email_already_in_use":
             MessageLookupByLibrary.simpleMessage("Email đã được sử dụng."),
         "error": MessageLookupByLibrary.simpleMessage("Lỗi"),
         "error_upload_avatar":
             MessageLookupByLibrary.simpleMessage("Lỗi upload ảnh đại diện"),
+        "first_name": MessageLookupByLibrary.simpleMessage("Họ"),
         "invalid_email":
             MessageLookupByLibrary.simpleMessage("Email không hợp lệ."),
         "is_online": MessageLookupByLibrary.simpleMessage("Đang hoạt động"),
         "language": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
+        "last_name": MessageLookupByLibrary.simpleMessage("Tên"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "login_subtitle": MessageLookupByLibrary.simpleMessage(
             "Đăng nhập bằng email\nchưa thể dùng số điện thoại"),
         "more": MessageLookupByLibrary.simpleMessage("Xem thêm"),
         "new_account":
             MessageLookupByLibrary.simpleMessage("Tạo tài khoản mới"),
+        "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
         "save_login":
             MessageLookupByLibrary.simpleMessage("Lưu thông tin đăng nhập"),
+        "set_user_data_failed": MessageLookupByLibrary.simpleMessage(
+            "Lỗi thiết lập dữ liệu người dùng"),
+        "signup": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "source_camera": MessageLookupByLibrary.simpleMessage("Chụp ảnh"),
         "source_gallery": MessageLookupByLibrary.simpleMessage("Thư viện"),
         "temp": MessageLookupByLibrary.simpleMessage("temp"),
         "unknown_error":
             MessageLookupByLibrary.simpleMessage("Lỗi không xác định!"),
+        "user_data_not_found": MessageLookupByLibrary.simpleMessage(
+            "Không tìm thấy dữ liệu người dùng"),
         "user_not_found":
             MessageLookupByLibrary.simpleMessage("Tài khoản không tồn tại."),
         "weak_password":

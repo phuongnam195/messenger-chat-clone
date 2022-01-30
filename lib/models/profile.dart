@@ -1,31 +1,34 @@
 class Profile {
-  final String id;
+  final String uid;
   final String email;
-  String firstName;
-  String lastName;
-  String? avatarUrl;
+  final String firstName;
+  final String lastName;
+  final String? avatarUrl;
 
   Profile({
-    required this.id,
+    required this.uid,
     required this.email,
     required this.firstName,
     required this.lastName,
     this.avatarUrl,
   });
 
+  Profile.withoutUID({
+    required this.email,
+    required this.firstName,
+    required this.lastName,
+    this.avatarUrl,
+  }) : uid = '';
+
   String get fullname => firstName + ' ' + lastName;
 
-  set avatarURL(String url) => avatarUrl = url;
-
-  factory Profile.fromMap(String id, Map<String, dynamic> map) {
-    return Profile(
-      id: id,
-      email: map['email'],
-      firstName: map['firstName'],
-      lastName: map['lastName'],
-      avatarUrl: map['avatarUrl'],
-    );
-  }
+  factory Profile.fromMap(String uid, Map<String, dynamic> map) => Profile(
+        uid: uid,
+        email: map['email'],
+        firstName: map['firstName'],
+        lastName: map['lastName'],
+        avatarUrl: map['avatarUrl'],
+      );
 
   Map<String, dynamic> toMap() => {
         'email': email,
@@ -34,9 +37,23 @@ class Profile {
         'avatarUrl': avatarUrl,
       }..removeWhere((_, value) => value == null);
 
+  Profile copyWith({
+    String? uid,
+    String? email,
+    String? firstName,
+    String? lastName,
+    String? avatarUrl,
+  }) =>
+      Profile(
+          uid: uid ?? this.uid,
+          email: email ?? this.email,
+          firstName: firstName ?? this.firstName,
+          lastName: lastName ?? this.lastName,
+          avatarUrl: avatarUrl ?? this.avatarUrl);
+
   bool equals(Profile? other) {
     if (other == null) return false;
-    return id == other.id &&
+    return uid == other.uid &&
         email == other.email &&
         firstName == other.firstName &&
         lastName == other.lastName &&

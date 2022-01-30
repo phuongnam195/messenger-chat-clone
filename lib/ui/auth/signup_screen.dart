@@ -1,14 +1,6 @@
-import 'dart:io';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../foundation/utils/firebase_helper.dart';
-import '../../models/profile.dart';
-import '../../foundation/utils/my_dialog.dart';
 import '../../generated/l10n.dart';
-import '../../foundation/utils/my_exception.dart';
-import '../../foundation/utils/validator.dart';
 import 'widgets/signup_card.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -19,34 +11,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  Future<bool> _onSubmit(Profile info, String password, File? imageFile) async {
-    try {
-      if (Validator.email(info.email) == false) {
-        throw MyException(S.current.invalid_email);
-      }
-      if (password.length < 6) {
-        throw MyException(S.current.weak_password);
-      }
-
-      await FirebaseHelper.signUp(info.email, password);
-      final account = await FirebaseHelper.createAccount(
-          tempProfile: info, avatarFile: imageFile);
-      if (account == null) {
-        FirebaseAuth.instance.currentUser!.delete();
-      }
-      Navigator.pop(context);
-      return true;
-    } on MyException catch (error) {
-      MyDialog.show(context, S.current.error, error.toString());
-    } catch (error) {
-      MyDialog.show(context, S.current.error, S.current.unknown_error);
-    }
-    return false;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final initInfoFromLogin =
+    final initDataFromLogin =
         ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -70,9 +37,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SignUpCard(
-                    initEmail: initInfoFromLogin['email'],
-                    initPassword: initInfoFromLogin['password'],
-                    onSubmit: _onSubmit,
+                    context,
+                    initEmail: initDataFromLogin['email'],
+                    initPassword: initDataFromLogin['password'],
                   ),
                   const SizedBox(height: 20),
                   TextButton(

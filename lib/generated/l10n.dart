@@ -50,10 +50,10 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `English`
+  /// `Tiếng Việt`
   String get language {
     return Intl.message(
-      'English',
+      'Tiếng Việt',
       name: 'language',
       desc: '',
       args: [],
@@ -130,6 +130,26 @@ class S {
     );
   }
 
+  /// `Không tìm thấy dữ liệu người dùng`
+  String get user_data_not_found {
+    return Intl.message(
+      'Không tìm thấy dữ liệu người dùng',
+      name: 'user_data_not_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lỗi thiết lập dữ liệu người dùng`
+  String get set_user_data_failed {
+    return Intl.message(
+      'Lỗi thiết lập dữ liệu người dùng',
+      name: 'set_user_data_failed',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Đăng nhập bằng email\nchưa thể dùng số điện thoại`
   String get login_subtitle {
     return Intl.message(
@@ -141,20 +161,20 @@ class S {
   }
 
   /// `Địa chỉ email`
-  String get auth_field_email {
+  String get email_address {
     return Intl.message(
       'Địa chỉ email',
-      name: 'auth_field_email',
+      name: 'email_address',
       desc: '',
       args: [],
     );
   }
 
   /// `Mật khẩu`
-  String get auth_field_password {
+  String get password {
     return Intl.message(
       'Mật khẩu',
-      name: 'auth_field_password',
+      name: 'password',
       desc: '',
       args: [],
     );
@@ -190,6 +210,16 @@ class S {
     );
   }
 
+  /// `Đăng ký`
+  String get signup {
+    return Intl.message(
+      'Đăng ký',
+      name: 'signup',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Tạo tài khoản mới`
   String get new_account {
     return Intl.message(
@@ -210,10 +240,10 @@ class S {
     );
   }
 
-  /// `Đã có tài khoản`
+  /// `Đã có tài khoản?`
   String get ask_signup {
     return Intl.message(
-      'Đã có tài khoản',
+      'Đã có tài khoản?',
       name: 'ask_signup',
       desc: '',
       args: [],
@@ -235,6 +265,26 @@ class S {
     return Intl.message(
       'Thư viện',
       name: 'source_gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Họ`
+  String get first_name {
+    return Intl.message(
+      'Họ',
+      name: 'first_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tên`
+  String get last_name {
+    return Intl.message(
+      'Tên',
+      name: 'last_name',
       desc: '',
       args: [],
     );

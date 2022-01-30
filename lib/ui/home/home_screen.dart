@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/auth/auth_state.dart';
 import '../../blocs/home_bloc.dart';
-import '../../blocs/account_bloc.dart';
 import '../../generated/l10n.dart';
-import '../../models/account.dart';
 import 'appbar.dart';
 import 'bottombar.dart';
 import 'pages/friend_page.dart';
@@ -14,24 +14,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    accountBloc.fetchAccount();
-
-    return StreamBuilder<Account>(
-      stream: accountBloc.currentAccount,
+    return StreamBuilder<AuthState>(
+      stream: authBloc.stream.where((state) => state is Authenticated),
       builder: (ctx, snapshot) {
-        if (snapshot.hasError) {
-          return Scaffold(
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Icon(Icons.error_outline),
-                Text(S.current.unknown_error),
-              ],
-            ),
-          );
-        }
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        if (!snapshot.hasData ||
+            snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
             body: Align(
               alignment: Alignment.topCenter,
@@ -40,26 +27,42 @@ class HomeScreen extends StatelessWidget {
           );
         }
 
-        final currentAccount = snapshot.data!;
-        return Scaffold(
-          extendBodyBehindAppBar: true,
-          backgroundColor: Colors.white,
-          appBar: HomeAppBar(profile: currentAccount.profile),
-          body: StreamBuilder<int>(
-              stream: homeBloc.page,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  if (snapshot.data == 1) {
-                    return const PeoplePage();
+        if (snapshot.data! is Authenticated) {
+          final authenticated = snapshot.data as Authenticated;
+          final profile = authenticated.profile;
+          final friendIDs = authenticated.friendIDs;
+
+          return Scaffold(
+            extendBodyBehindAppBar: true,
+            backgroundColor: Colors.white,
+            appBar: HomeAppBar(profile: profile),
+            body: StreamBuilder<int>(
+                stream: homeBloc.page,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    if (snapshot.data == 1) {
+                      return const PeoplePage();
+                    }
                   }
-                }
-                return FriendPage(
-                  myId: currentAccount.profile.id,
-                  friendIDs: currentAccount.friendIDs,
-                );
-              }),
-          extendBody: true,
-          bottomNavigationBar: const HomeBottomBar(),
+                  return FriendPage(
+                    myId: profile.uid,
+                    friendIDs: friendIDs,
+                  );
+                }),
+            extendBody: true,
+            bottomNavigationBar: const HomeBottomBar(),
+          );
+        }
+
+        return Scaffold(
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Icon(Icons.error_outline),
+              Text(S.current.unknown_error),
+            ],
+          ),
         );
       },
     );

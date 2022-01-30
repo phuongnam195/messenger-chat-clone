@@ -1,37 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../models/account.dart';
-import '../models/profile.dart';
+// import '../models/account.dart';
+// import '../models/profile.dart';
 
-class AccountRepository {
-  final _usersFirestore = FirebaseFirestore.instance.collection('users');
+// class AccountRepository {
+//   final _usersFirestore = FirebaseFirestore.instance.collection('users');
 
-  // Lấy dữ liệu của tài khoản hiện tại từ Firebase
-  Future<Account?> fetchAccount(String uid) async {
-    final snapshot = await _usersFirestore.doc(uid).get();
-    final map = snapshot.data();
-
-    if (map == null) {
-      print(
-          '<<AccountRepository-fetchProfile()>>: No data for this account ($uid)');
-      //TODO: throw exception
-      return null;
-    }
-
-    final profile = Profile.fromMap(uid, map);
-    var account = Account(profile, []);
-    if (map['friendIDs'] != null) {
-      for (var e in map['friendIDs']) {
-        String friendId = e as String;
-        account.addFriend(friendId);
-      }
-    }
-
-    return account;
-  }
-
-  // Cập nhật trạng thái online cho tài khoản [uid]
-  Future<void> setOnline(String uid, bool newState) async {
-    await _usersFirestore.doc(uid).update({'isOnline': newState});
-  }
-}
+//   // Cập nhật trạng thái online cho tài khoản [uid]
+//   Future<void> setOnline(String uid, bool newState) async {
+//     await _usersFirestore.doc(uid).update({'isOnline': newState});
+//   }
+// }

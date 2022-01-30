@@ -1,7 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'blocs/auth/auth_event.dart';
+import 'blocs/auth/auth_bloc.dart';
+import 'blocs/auth/auth_state.dart';
 import 'foundation/constants.dart';
 import 'generated/l10n.dart';
 import 'ui/auth/login_screen.dart';
@@ -19,17 +21,29 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    authBloc.add(AppLaunched());
+
     return MaterialApp(
       title: 'Messenger',
       debugShowCheckedModeBanner: false,
       theme: appThemeData,
-      home: StreamBuilder<User?>(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (ctx, userSnapshot) {
-            if (userSnapshot.hasData) {
-              return const HomeScreen();
+      home: StreamBuilder<AuthState>(
+          stream: authBloc.stream.where(
+              (state) => state is Authenticated || state is Unauthenticated),
+          // initialData: Unauthenticated(),
+          builder: (ctx, snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data! is Authenticated) {
+                return const HomeScreen();
+              } else if (snapshot.data! is Unauthenticated) {
+                return const LoginScreen();
+              }
             }
-            return const LoginScreen();
+            return Container(
+              color: Colors.white,
+              width: double.infinity,
+              height: double.infinity,
+            );
           }),
       routes: {
         ChatScreen.routeName: (ctx) => const ChatScreen(),

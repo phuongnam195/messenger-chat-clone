@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MyDialog {
-  static void show(BuildContext context, String title, String message) {
+  static void show(BuildContext parent, String title, String message) {
     showDialog(
-        context: context,
+        context: parent,
         builder: (ctx) => AlertDialog(
               title: Text(
                 title,
