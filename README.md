@@ -36,5 +36,5 @@ https://messenger-chat-clone.web.app
 - [ ] Reply a specific message
 - [ ] Send emoji
 
-## Tool
+## Tech
 Flutter, Firebase
