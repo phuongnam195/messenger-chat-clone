@@ -20,10 +20,10 @@ https://messenger-chat-clone.web.app
 </table>
 
 ## Functions
-- [x] Login/Sign up
+- [ ] Login/Sign up
 - [x] Conversation between 2 account
 - [x] Send picture, thumb up symbol
-- [x] Online tracking
+- [ ] Online tracking
 - [ ] Add friends / Unfriend
 - [ ] Settings screen
 - [ ] Lazy load for conversations/messages
