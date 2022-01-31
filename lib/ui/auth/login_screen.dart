@@ -6,10 +6,10 @@ import 'widgets/login_card.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
+  final loginCard = const LoginCard();
+
   @override
   Widget build(BuildContext context) {
-    var screenHeight = MediaQuery.of(context).size.height;
-
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -20,22 +20,57 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                SizedBox(
-                  height: screenHeight / 6.5,
-                  child: _wxLogo(),
+                Builder(
+                  builder: (context) {
+                    final screenHeight = MediaQuery.of(context).size.height;
+                    return SizedBox(
+                      height: screenHeight / 6.5,
+                      child: _wxLogo(),
+                    );
+                  },
                 ),
-                SizedBox(height: screenHeight / 17),
-                SizedBox(
-                  height: screenHeight / 15,
-                  child: _wxSubtitle(),
+                Builder(
+                  builder: (context) {
+                    final screenHeight = MediaQuery.of(context).size.height;
+                    return SizedBox(height: screenHeight / 17);
+                  },
                 ),
-                SizedBox(height: screenHeight / 28),
-                SizedBox(
-                  height: screenHeight * 0.42,
-                  child: LoginCard(context),
+                Builder(
+                  builder: (context) {
+                    final screenHeight = MediaQuery.of(context).size.height;
+                    return SizedBox(
+                      height: screenHeight / 15,
+                      child: _wxSubtitle(),
+                    );
+                  },
                 ),
-                SizedBox(height: screenHeight * 0.02),
-                _wxForgot(context, screenHeight),
+                Builder(
+                  builder: (context) {
+                    final screenHeight = MediaQuery.of(context).size.height;
+                    return SizedBox(height: screenHeight / 28);
+                  },
+                ),
+                Builder(
+                  builder: (context) {
+                    final screenHeight = MediaQuery.of(context).size.height;
+                    return SizedBox(
+                      height: screenHeight * 0.42,
+                      child: loginCard,
+                    );
+                  },
+                ),
+                Builder(
+                  builder: (context) {
+                    final screenHeight = MediaQuery.of(context).size.height;
+                    return SizedBox(height: screenHeight * 0.02);
+                  },
+                ),
+                Builder(
+                  builder: (context) {
+                    final screenHeight = MediaQuery.of(context).size.height;
+                    return _wxForgot(context, screenHeight);
+                  },
+                ),
               ],
             ),
           ),
