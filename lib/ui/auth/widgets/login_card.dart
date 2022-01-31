@@ -10,9 +10,7 @@ import '../signup_screen.dart';
 import 'auth_text_field.dart';
 
 class LoginCard extends StatefulWidget {
-  const LoginCard(this.parent, {Key? key}) : super(key: key);
-
-  final BuildContext parent;
+  const LoginCard({Key? key}) : super(key: key);
 
   @override
   State<LoginCard> createState() => _LoginCardState();
@@ -43,7 +41,6 @@ class _LoginCardState extends State<LoginCard> {
 
   @override
   Widget build(BuildContext context) {
-    var screenWidth = MediaQuery.of(context).size.width;
 
     return StreamBuilder<AuthState>(
         stream: _authState
@@ -56,48 +53,52 @@ class _LoginCardState extends State<LoginCard> {
             if (snapshot.data is AuthFailure) {
               final authFailure = snapshot.data as AuthFailure;
               WidgetsBinding.instance!.addPostFrameCallback((_) {
-                MyDialog.show(
-                    widget.parent, S.current.error, authFailure.message);
+                MyDialog.show(context, S.current.error, authFailure.message);
               });
             } else if (snapshot.data is AuthLoading) {
               isLoading = true;
             }
           }
 
-          return Container(
-            width: screenWidth > 400 ? 400 : null,
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(
-                  flex: 3,
-                  child: _wxEmailField(context, emailController,
-                      passwordFocusNode, borderRadius),
+          return Builder(
+            builder: (context) {
+              var screenWidth = MediaQuery.of(context).size.width;
+              return Container(
+                width: screenWidth > 400 ? 400 : null,
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      flex: 3,
+                      child: _wxEmailField(context, emailController,
+                          passwordFocusNode, borderRadius),
+                    ),
+                    const SizedBox(height: 4),
+                    Flexible(
+                      flex: 3,
+                      child: _wxPasswordField(emailController,
+                          passwordController, passwordFocusNode, borderRadius),
+                    ),
+                    Flexible(
+                      flex: 3,
+                      child: _wxSaveLogin(saveLogin),
+                    ),
+                    Flexible(
+                        flex: 3,
+                        child: _wxLoginButton(
+                            emailController, passwordController, borderRadius,
+                            loading: isLoading)),
+                    const Spacer(flex: 1),
+                    Flexible(
+                      flex: 3,
+                      child: _wxNewAccount(context, emailController,
+                          passwordController, borderRadius),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 4),
-                Flexible(
-                  flex: 3,
-                  child: _wxPasswordField(emailController, passwordController,
-                      passwordFocusNode, borderRadius),
-                ),
-                Flexible(
-                  flex: 3,
-                  child: _wxSaveLogin(saveLogin),
-                ),
-                Flexible(
-                    flex: 3,
-                    child: _wxLoginButton(
-                        emailController, passwordController, borderRadius,
-                        loading: isLoading)),
-                const Spacer(flex: 1),
-                Flexible(
-                  flex: 3,
-                  child: _wxNewAccount(context, emailController,
-                      passwordController, borderRadius),
-                ),
-              ],
-            ),
+              );
+            },
           );
         });
   }
